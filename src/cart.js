@@ -45,9 +45,33 @@ function changeQuantity(cart, productId, newQuantity) {
 function removeFromCart(cart, productId) {
   return cart.filter((item) => item.id !== productId);
 }
-function calculateCartSubtotal() {}
-function calculateOrderTotal() {
-  return notImplemented();
+function calculateCartSubtotal(cart) {
+  const result = cart.reduce((sum, item) => {
+    return sum + item.price * item.quantity;
+  }, 0);
+  return result;
+}
+function calculateOrderTotal(cart, promoCode) {
+  const subtotal = calculateCartSubtotal(cart);
+
+  let discount = 0;
+  if (promoCode === "SAVE10" && subtotal >= 20000) {
+    discount = subtotal * 0.1;
+  }
+
+  let delivery = 0;
+  if (subtotal < 50000) {
+    delivery = 30000;
+  }
+
+  const total = subtotal - discount + delivery;
+
+  return {
+    subtotal,
+    discount,
+    delivery,
+    total,
+  };
 }
 
 const cartApi = {
