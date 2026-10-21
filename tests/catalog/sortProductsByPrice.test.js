@@ -8,7 +8,7 @@ describe("sortProductsByPrice", () => {
     expect(resultIds).toEqual([3, 6, 5, 4, 2, 1]);
   });
   test("все товары без направления сортируются как [3, 6, 5, 4, 2, 1]", () => {
-    const result = sortProductsByPrice(products, "");
+    const result = sortProductsByPrice(products);
     const resultIds = result.map((product) => product.id);
     expect(resultIds).toEqual([3, 6, 5, 4, 2, 1]);
   });
